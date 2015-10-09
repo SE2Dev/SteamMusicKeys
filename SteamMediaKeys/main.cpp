@@ -49,8 +49,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 4;
 	}
 
+	SMK_RegisterHotkeys(hWnd);
 	SMK_MessageLoop();
 
+	SMK_UnregisterHotkeys(hWnd);
 	SteamAPI_Shutdown();
 	return 0;
 }
