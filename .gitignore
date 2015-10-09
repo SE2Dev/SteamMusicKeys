@@ -1,0 +1,9 @@
+/Debug
+/SteamMediaKeys/Debug
+/ipch
+
+*.suo
+*.sdf
+
+*.vcxproj.filters
+*.vcxproj.user
