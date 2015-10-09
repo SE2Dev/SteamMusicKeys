@@ -1,16 +1,11 @@
 #include <Windows.h>
 
-#pragma warning(push, 0)  
-#include "sdk\public\steam\steam_api.h"
-#pragma comment(lib, "sdk\\redistributable_bin\\steam_api.lib")
-#pragma warning(pop)  
-
 #include "smk.h"
 
 #define STEAMAPI_STEAMISRUNNING_RETRY_COUNT 64
 #define STEAMAPI_STEAMISRUNNING_RETRY_DELAY 1000
 
-static ISteamMusic* IMus = nullptr;
+ISteamMusic* IMus = nullptr;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {

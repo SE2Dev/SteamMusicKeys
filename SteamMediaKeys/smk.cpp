@@ -1,9 +1,37 @@
 #include "smk.h"
 
+void SMK_TogglePlayback()
+{
+	if (IMus->GetPlaybackStatus() == AudioPlayback_Playing)
+		IMus->Pause();
+	else
+		IMus->Play();
+}
+
 LRESULT WINAPI SMK_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (msg == WM_HOTKEY)
 	{
+		//
+		// Prevent hotkeys from attempting to begin playback if queue is empty
+		// as well as when steam music has not yet manually been initialized (AudioPlayback_Idle)
+		// to prevent issues when using other media players
+		//
+		if (IMus->GetPlaybackStatus() != AudioPlayback_Idle)
+		{
+			switch (HIWORD(lParam))
+			{
+			case VK_MEDIA_PLAY_PAUSE:
+				SMK_TogglePlayback();
+				break;
+			case VK_MEDIA_NEXT_TRACK:
+				IMus->PlayNext();
+				break;
+			case VK_MEDIA_PREV_TRACK:
+				IMus->PlayPrevious();
+				break;
+			}
+		}
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
