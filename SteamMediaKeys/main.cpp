@@ -5,6 +5,8 @@
 #pragma comment(lib, "sdk\\redistributable_bin\\steam_api.lib")
 #pragma warning(pop)  
 
+#include "smk.h"
+
 #define STEAMAPI_STEAMISRUNNING_RETRY_COUNT 64
 #define STEAMAPI_STEAMISRUNNING_RETRY_DELAY 1000
 
@@ -35,8 +37,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if(!(IMus = SteamMusic()))
 	{
 		MessageBox(0, L"ERROR: Could not initialize Steam Music", 0, 0);
+		SteamAPI_Shutdown();
 		return 3;
 	}
 
+	HWND hWnd = SMK_CreateDummyWindow(hInstance, L"SteamMusicKeys");
+	if(!hWnd)
+	{
+		MessageBox(0, L"ERROR: Could not create dummy window", 0, 0);
+		SteamAPI_Shutdown();
+		return 4;
+	}
+
+	SMK_MessageLoop();
+
+	SteamAPI_Shutdown();
 	return 0;
 }
