@@ -4,6 +4,11 @@
 
 *.suo
 *.sdf
+*.dll
 
 *.vcxproj.filters
 *.vcxproj.user
+
+sdk
+steam_appid.txt
+.vs
