@@ -2,10 +2,14 @@
 
 void SMK_TogglePlayback()
 {
-	if (IMus->GetPlaybackStatus() == AudioPlayback_Playing)
+	if (IMus->GetPlaybackStatus() == AudioPlayback_Playing) 
+	{
 		IMus->Pause();
-	else
+	}
+	else 
+	{
 		IMus->Play();
+	}
 }
 
 LRESULT WINAPI SMK_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
